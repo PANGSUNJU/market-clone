@@ -1,6 +1,7 @@
 const form = document.getElementById("write-form");
 
 const handleSubmitForm = async (event) => {
+  // 이벤트 전파 방지 정도
   event.preventDefault();
   const body = new FormData(form);
   body.append("insertAt", new Date().getTime());

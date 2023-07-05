@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, Form, Response
+from fastapi import FastAPI,UploadFile,Form,Response
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from fastapi.staticfiles import StaticFiles
@@ -7,6 +7,18 @@ import sqlite3
 
 con = sqlite3.connect('db.db', check_same_thread=False)
 cur = con.cursor()
+
+cur.execute(f"""
+            create table IF NOT EXISTS items (
+              id INTEGER primary key,
+              title TEXT not null,
+              image BLOB,
+              price INTEGER not null,
+              description TEXT,
+              place TEXT not null,
+              insertAt INTEGER not null 
+              );
+            """)
 
 app = FastAPI()
 
